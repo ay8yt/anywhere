@@ -1,0 +1,22 @@
+{
+  "name": "anywhere",
+  "version": "1.0.0",
+  "description": "这是一个静**态资源服务工具**，可以将静态目录使用url进行访问",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ay8yt/anywhere.git"
+  },
+  "author": "yintao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ay8yt/anywhere/issues"
+  },
+  "homepage": "https://github.com/ay8yt/anywhere#readme",
+  "devDependencies": {
+    "eslint": "^4.19.1"
+  }
+}

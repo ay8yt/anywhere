@@ -1,0 +1,40 @@
+#表示当前所在为根目录
+
+root = true
+
+#匹配所有文件
+
+[*]
+
+#使用utf8字符集编码
+
+charset = utf-8
+
+#缩进风格，空格键
+
+indent_style = space
+
+#缩进大小， 4个
+
+indent_size = 4
+
+#Unix风格换行符，即\n，windows下换行是\r\n
+
+end_of_line = lf
+
+#在文件末尾追加一个空行
+
+insert_final_newline = true
+
+#去掉每行后面多余的空格
+
+trim_trailing_whitespace = true
+
+#匹配所有json文件
+
+[*.json]
+
+#默认缩进风格及大小
+
+indent_style = space
+indent_size = 2
