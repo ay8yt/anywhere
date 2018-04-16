@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>dir-list</title>
+	</head>
+	<style>
+		body {
+			margin : 30px;
+		}
+		ul {
+			list-style: none;
+		}
+		ul li {
+			padding: 5px;
+			border-radius: 4px;
+			background: rgb(240,240,240);
+			margin-bottom: 10px;
+			overflow: hidden;
+			
+		}
+		ul li a {
+			display: block;
+			margin : 10px;
+			padding: 10px;
+			height: 30px; line-height: 30px;
+			background: #EEE;
+			border-radius: 4px;
+			box-shadow: 0 0 1px 1px #666;
+			text-decoration: none;
+			color: #0880a7;
+			float: left;
+		}
+		ul li a.title {
+			color: black;
+			font-size: 28px;
+		}
+		ul li a:hover {
+			color: blue;
+		}
+		ul li a span.folder-icon {
+			display: block;
+			background: url("http://localhost:9999/src/images/folder.png");
+			background-size: cover;
+			width: 30px; height: 25px;
+			float: left;
+		}
+	</style>
+	<body>
+		<ul>
+		<li>
+		<% let firstLetter = data[0].filename[0]; 
+		%>
+		<a class='title'><%=firstLetter.toUpperCase()%></a>
+		
+	 	<% for(let i=0; i<data.length; i++) {
+				if( data[i].filename[0]!=firstLetter ) { 
+					firstLetter = data[i].filename[0];
+		%>
+					</li><li> 
+			<a class='title'><%=firstLetter.toUpperCase()%></a>
+			<%  } %>
+			<a href="<%= basePath + '/' + data[i].filename%>">
+				<% if(data[i].type == 'dir')  { %> <span class="folder-icon"></span> <% } %>
+				<%= data[i].filename%>
+			</a>		
+		<%  }  %>
+		</li>
+		</ul>
+	</body>
+</html>

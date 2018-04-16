@@ -1,20 +1,17 @@
 
-//window.alert();  //ESline检查会报错，因为指定了node环境，没有window
 
+require('colors'); //增加命令行输出颜色，引入后直接使用
+const template = require('art-template'); //art-template模板引擎，引入后直接使用
 const http = require('http');
+const compress = require('./util/compress');
 
 const conf = require('./config/default');
+const {handle} = require('./core/route');
 
-const server = http.createServer((req,res)=>{
-    res.statusCode = 200;
-    res.setHeader('Content-Type','text/html;charset=UTF-8');
-    res.write('<html>')
-    res.write('<body>hello，这是服务器返回的数据</body>');
-    res.write('</html>')
-    res.end();
-})
+let server = http.createServer( (req,res) => {
+	handle(req,res);
+});
 
 server.listen(conf.port, conf.hostname, ()=>{
-    let addr = `http://${conf.hostname}:${conf.port}`;
-    console.info(`Server started at ${addr}`);
+    console.info(`Server started at http://${conf.hostname}:${conf.port}`.green )
 })
