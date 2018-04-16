@@ -5,7 +5,10 @@
 	npm install ay8yt-anywhere -g
 
 ## 使用方法
-	anywhere # 把文件夹当成静态资源服务器根目录
+
+进入任意目录，使用如下命令：
+
+	anywhere # 把当前文件夹当成静态资源服务器根目录
 
 	anywhere --port=8080 # 设置端口号为 8080
 	

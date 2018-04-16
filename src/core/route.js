@@ -56,11 +56,14 @@ async function route(req, res, conf){
 				}
 			})
 
-			console.log(filelist)
 			let htmlstr = temp({
 				data:filelist,
-				basePath: `http://${conf.hostname}:${conf.port}`  //获取服务器地址及端口号
+				basePath: `http://${conf.hostname}:${conf.port}`,  //获取服务器地址及端口号
+				currentPath: uri.replace(/([^\/])$/, "$1/"), //获取请求的当前路径， 例如请求http://localhost:9527/src/util, 则返回src/util
 			});
+			console.info( uri.replace(/([^\/])$/, "$1/").gray)
+
+
 
 			// console.log(files, path.basename(uri));
 			res.end( htmlstr );	
