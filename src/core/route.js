@@ -2,6 +2,7 @@ const conf = require('../config/default');
 const path = require('path');
 const fs = require('fs');
 const {promisify} = require("util");
+const base64 = require('../util/file-base64');
 
 //异步方法，包装成promise方法
 const stat = promisify(fs.stat); 
@@ -18,7 +19,7 @@ async function route(req, res, conf){
 	//将命令行所在当前路径(本地磁盘路径)，与用户请求路径(/xxx)拼接起来
 	let filepath = path.join(process.cwd(),uri);
 	//打印出路径，即文件本地磁盘的真实路径
-	console.log(filepath.green);
+	// console.log(filepath.green);
 
 	try {
 
@@ -55,17 +56,14 @@ async function route(req, res, conf){
 					type : fs.statSync( path.join(process.cwd(),uri, filename) ).isDirectory() ? 'dir' : 'file'
 				}
 			})
-
+			// console.log( path.join(__dirname,"../images/folder.png").red )
 			let htmlstr = temp({
+				folderimg: base64(path.join(__dirname,"../images/folder.png")),
 				data:filelist,
 				basePath: `http://${conf.hostname}:${conf.port}`,  //获取服务器地址及端口号
 				currentPath: uri.replace(/([^\/])$/, "$1/"), //获取请求的当前路径， 例如请求http://localhost:9527/src/util, 则返回src/util
 			});
-			console.info( uri.replace(/([^\/])$/, "$1/").gray)
 
-
-
-			// console.log(files, path.basename(uri));
 			res.end( htmlstr );	
 
 		}	

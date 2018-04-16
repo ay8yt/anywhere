@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title><%=basePath%></title>
+		<title><%=folderimg%></title>
 	</head>
 	<style>
 		body {
@@ -38,10 +38,8 @@
 		ul li a:hover {
 			color: blue;
 		}
-		ul li a span.folder-icon {
+		ul li a img.folder-icon {
 			display: block;
-			background: url("/src/images/folder.png");
-			background-size: cover;
 			width: 30px; height: 25px;
 			float: left;
 		}
@@ -61,7 +59,7 @@
 			<a class='title'><%=firstLetter.toUpperCase()%></a>
 			<%  } %>
 			<a href="<%= basePath + currentPath + data[i].filename%>">
-				<% if(data[i].type == 'dir')  { %> <span class="folder-icon"></span> <% } %>
+				<% if(data[i].type == 'dir')  { %> <img src="data:image/png;base64,<%=folderimg%>" class="folder-icon"></img> <% } %>
 				<%= data[i].filename%>
 			</a>
 		<%  }  %>
