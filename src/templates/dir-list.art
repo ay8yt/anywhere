@@ -17,7 +17,7 @@
 			background: rgb(240,240,240);
 			margin-bottom: 10px;
 			overflow: hidden;
-			
+
 		}
 		ul li a {
 			display: block;
@@ -40,7 +40,7 @@
 		}
 		ul li a span.folder-icon {
 			display: block;
-			background: url("<%=basePath%>/src/images/folder.png");
+			background: url("/src/images/folder.png");
 			background-size: cover;
 			width: 30px; height: 25px;
 			float: left;
@@ -49,21 +49,21 @@
 	<body>
 		<ul>
 		<li>
-		<% let firstLetter = data[0].filename[0]; 
+		<% let firstLetter = data[0].filename[0];
 		%>
 		<a class='title'><%=firstLetter.toUpperCase()%></a>
-		
+
 	 	<% for(let i=0; i<data.length; i++) {
-				if( data[i].filename[0]!=firstLetter ) { 
+				if( data[i].filename[0]!=firstLetter ) {
 					firstLetter = data[i].filename[0];
 		%>
-					</li><li> 
+					</li><li>
 			<a class='title'><%=firstLetter.toUpperCase()%></a>
 			<%  } %>
 			<a href="<%= basePath + currentPath + data[i].filename%>">
 				<% if(data[i].type == 'dir')  { %> <span class="folder-icon"></span> <% } %>
 				<%= data[i].filename%>
-			</a>		
+			</a>
 		<%  }  %>
 		</li>
 		</ul>
