@@ -1,8 +1,11 @@
 {
   "name": "anywhere",
-  "version": "1.0.0",
+  "version": "1.1.2",
   "description": "这是一个静**态资源服务工具**，可以将静态目录使用url进行访问",
-  "main": "main.js",
+  "main": "src/app.js",
+  "bin": {
+    "anywhere" : "bin/load"
+  },
   "scripts": {
     "server": "node ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +25,7 @@
   },
   "dependencies": {
     "art-template": "^4.12.2",
-    "colors": "^1.2.1"
+    "colors": "^1.2.1",
+    "yargs": "^11.0.0"
   }
 }

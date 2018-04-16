@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>dir-list</title>
+		<title><%=basePath%></title>
 	</head>
 	<style>
 		body {
@@ -40,7 +40,7 @@
 		}
 		ul li a span.folder-icon {
 			display: block;
-			background: url("http://localhost:9999/src/images/folder.png");
+			background: url("<%=basePath%>/src/images/folder.png");
 			background-size: cover;
 			width: 30px; height: 25px;
 			float: left;

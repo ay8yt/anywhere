@@ -7,9 +7,9 @@
 ## 使用方法
 	anywhere # 把文件夹当成静态资源服务器根目录
 
-	anywhere -p 8080 # 设置端口号为 8080
+	anywhere --port=8080 # 设置端口号为 8080
 	
-	anywhere -h localhost # 设置 host 为 localhost
+	anywhere --host=localhost # 设置 host 为 localhost
 
 
 

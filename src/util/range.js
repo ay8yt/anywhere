@@ -1,7 +1,7 @@
 
 module.exports = (total, req, res) => {
 	let range = req.headers['range'];
-	if(!range) return {code ； 200};
+	if(!range) return {code : 200};
 
 	let matched = range.match(/bytes=(\d*)-(\d*)/);
 	let [start, end, length] = [ matched[1],matched[2], matched[2]-matched[1] ];

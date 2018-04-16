@@ -12,25 +12,32 @@ const compress = require('../util/compress');
 //部分请求
 const range = require('../util/range');
 
-async function handle(req, res){
+async function route(req, res, conf){
 	//根据请求的地址，返回请求的文件，首先获取请求地址
 	let uri = req.url;
-	//将命令行所在当前路径，与用户请求路径拼接起来
+	//将命令行所在当前路径(本地磁盘路径)，与用户请求路径(/xxx)拼接起来
 	let filepath = path.join(process.cwd(),uri);
+	//打印出路径，即文件本地磁盘的真实路径
 	console.log(filepath.green);
 
 	try {
 
-		let state = await stat(filepath);
-		
+		let state = await stat(filepath); //调用结果promisify包装的stat方法
+
 		res.statusCode = 200;
-		if(state.isFile()) { //文件读取
+		if(state.isFile()) { //如果是文件
+
 			res.setHeader('Content-Type','text/plain;charset=utf8');
 
-			
+			//处理range请求，如果存在的话，code=206,如果不存在，code=200
 			let {code, start, end} = range(state.size, req, res);
-
-			let readstream = fs.createReadStream(filepath)
+			let readstream = null;
+			if(code == 206) {
+				res.statusCode = 206;
+				readstream = fs.createReadStream(filepath, {start, end});
+			} else {
+				readstream = fs.createReadStream(filepath)
+			}
 			//判断文件类型，决定是否压缩
 			if(filepath.match(conf.compress)) {
 				readstream = compress(readstream, req, res);
@@ -52,7 +59,7 @@ async function handle(req, res){
 			console.log(filelist)
 			let htmlstr = temp({
 				data:filelist,
-				basePath: path.basename(uri)  //获取当前请求地址
+				basePath: `http://${conf.hostname}:${conf.port}`  //获取服务器地址及端口号
 			});
 
 			// console.log(files, path.basename(uri));
@@ -68,5 +75,5 @@ async function handle(req, res){
 }
 
 module.exports = {
-	handle
+	route
 }
