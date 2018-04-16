@@ -5,7 +5,7 @@ const {promisify} = require("util");
 const base64 = require('../util/file-base64');
 
 //异步方法，包装成promise方法
-const stat = promisify(fs.stat); 
+const stat = promisify(fs.stat);
 const readdir = promisify(fs.readdir);
 
 //压缩处理
@@ -48,6 +48,12 @@ async function route(req, res, conf){
 		} else if(state.isDirectory()) { //文件夹读取
 			res.setHeader('Content-Type','text/html;charset=utf8');
 			let files = await readdir(filepath);
+
+            if(!files || files.length==0) { //如果是空文件夹，直接返回提示
+                res.end("该文件夹无内容!");
+                return;
+            }
+
 			let temp = require("../templates/dir-list.art");
 
 			let filelist = files.map((filename, index)=>{
@@ -64,9 +70,9 @@ async function route(req, res, conf){
 				currentPath: uri.replace(/([^\/])$/, "$1/"), //获取请求的当前路径， 例如请求http://localhost:9527/src/util, 则返回src/util
 			});
 
-			res.end( htmlstr );	
+			res.end( htmlstr );
 
-		}	
+		}
 	} catch (e) {
 		console.log(e.toString().red);
 		res.statusCode = 404;
